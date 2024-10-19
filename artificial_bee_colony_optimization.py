@@ -1,9 +1,12 @@
 import numpy as np
 import random
+import matplotlib.pyplot as plt  # Grafik için eklenmiştir
+
 
 def objective_function(x):
     """Hesaplanan nesne fonksiyonu."""
     return sum(x ** 2)
+
 
 def fitness_function(f):
     """Fitness değerini hesaplar."""
@@ -12,6 +15,7 @@ def fitness_function(f):
     else:
         return 1 + abs(f)
 
+
 def roulette_wheel_selection(probabilities):
     """Roulette wheel selection yöntemi ile bir index döndürür."""
     r = np.random.rand()
@@ -19,6 +23,7 @@ def roulette_wheel_selection(probabilities):
     for i in range(len(cumulative_prob)):
         if r <= cumulative_prob[i]:
             return i
+
 
 def abc_algorithm(pop_size=32, dimensions=2, lower_bound=-5, upper_bound=5, iterations=100, limit_value=10):
     """ABC optimizasyon algoritmasını uygular."""
@@ -36,6 +41,9 @@ def abc_algorithm(pop_size=32, dimensions=2, lower_bound=-5, upper_bound=5, iter
 
     Gbest_X = X[np.argmin(F)]
     Gbest_f = np.min(F)
+
+    # En iyi değerleri saklamak için liste
+    best_values = [Gbest_f]
 
     # Ana döngü
     for iter in range(iterations):
@@ -87,6 +95,9 @@ def abc_algorithm(pop_size=32, dimensions=2, lower_bound=-5, upper_bound=5, iter
         Gbest_X = X[np.argmin(F)]
         Gbest_f = np.min(F)
 
+        # En iyi değerleri güncelle
+        best_values.append(Gbest_f)
+
         # Emekçi arı emeklilik aşaması
         for i in range(worker_bees):
             if non_improvement_counter[i] >= limit_value:
@@ -99,9 +110,18 @@ def abc_algorithm(pop_size=32, dimensions=2, lower_bound=-5, upper_bound=5, iter
         Gbest_X = X[np.argmin(F)]
         Gbest_f = np.min(F)
 
-    return Gbest_f, Gbest_X
+    return Gbest_f, Gbest_X, best_values  # En iyi değerleri de döndür
+
 
 if __name__ == '__main__':
-    best_fitness, best_position = abc_algorithm()
+    best_fitness, best_position, best_values = abc_algorithm()
     print(f"Minimum Değer: {best_fitness}")
     print(f"Minimum Nokta: {best_position}")
+
+    # En iyi değerlerin grafiğini çiz
+    plt.plot(best_values)
+    plt.title('En İyi Amaç Değeri Yakınsama Eğrisi')
+    plt.xlabel('İterasyon Sayısı')
+    plt.ylabel('Amaç Değeri')
+    plt.grid()
+    plt.show()
