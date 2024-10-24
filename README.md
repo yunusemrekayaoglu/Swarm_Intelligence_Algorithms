@@ -202,3 +202,69 @@ This function implements the Grey Wolf Optimizer (GWO).
 ##### Output:
 - The algorithm prints the best solution (position of the alpha wolf) and the corresponding function value for each run.
 - The mean and standard deviation of the best solutions across all runs are also printed.
+
+
+
+
+
+## 4. Whale Optimization Algorithm in Python
+
+This repository contains an implementation of the **Whale Optimization Algorithm (WOA)** in Python. WOA is a nature-inspired optimization technique that simulates the hunting behavior of humpback whales to find optimal solutions in a given search space. This implementation is designed to minimize an objective function defined as the sum of squares of the input variables.
+
+### Objective Function
+
+The objective function for this example is defined as:
+
+\[
+f(X) = \sum_{i=1}^{D} X_i^2
+\]
+
+This function is a simple quadratic function, where the global minimum is located at \(X = [0, 0, \ldots, 0]\).
+
+### Algorithm Overview
+
+The **Whale Optimization Algorithm (WOA)** works by initializing a population of candidate solutions (whales) that explore the search space. The algorithm follows these main steps:
+
+1. **Initialization**: Whales are randomly initialized within the bounds defined by `lb` (lower bound) and `ub` (upper bound).
+2. **Evaluation**: The objective function is evaluated for each whale to determine its fitness.
+3. **Update Best Solutions**: The best solution among the whales is tracked.
+4. **Position Update**: Whales update their positions based on their best solution and the best solutions of others.
+5. **Iteration**: Steps 2-4 are repeated for a defined number of iterations (`T`).
+
+### Code Structure
+
+#### `obj(X)` Function
+
+This function computes the objective function value for a given input vector `X`.
+
+##### Parameters:
+- `X`: A numpy array representing the input vector.
+
+##### Returns:
+- The sum of squares of the elements in `X`.
+
+#### `whale_optimization()` Function
+
+This function implements the Whale Optimization Algorithm.
+
+##### Parameters:
+- `lb`: The lower bound of the search space for each dimension (default is `-5.12`).
+- `ub`: The upper bound of the search space for each dimension (default is `5.12`).
+- `dim`: The dimensionality of the search space (default is `2`).
+- `N`: The number of whales in the population (default is `30`).
+- `T`: The maximum number of iterations (default is `100`).
+
+##### Process:
+1. **Initialization**: Randomly initialize the positions `X` of the whales and evaluate their objective function values `F`.
+2. **Best Solution Tracking**: Track the best position found by any whale (`Xbest`) and its corresponding objective function value (`Fbest`).
+3. **Position Update**: For each iteration:
+   - Update the positions of the whales based on their best solution and the behavior of other whales.
+   - Apply boundary constraints to ensure the positions remain within the defined limits.
+   - Evaluate the objective function for each whale and update the best solution accordingly.
+
+##### Output:
+- The function returns the global best position and its corresponding objective function value, along with the fitness values over iterations.
+
+### Results
+
+The results of the optimization can be visualized through a plot of the fitness values over iterations, showing the convergence behavior of the algorithm.
