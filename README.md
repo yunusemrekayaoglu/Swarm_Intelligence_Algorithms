@@ -455,3 +455,67 @@ This function implements the Salp Swarm Optimization algorithm.
 - The function prints the best objective function value found (`fitBest`) and the corresponding position (`F`) at the end of the optimization.
 
 
+
+
+## 8. Remora Optimization in Python
+
+This repository contains an implementation of the **Remora Optimization (Remora Opt)** algorithm in Python. The Remora Opt algorithm is a nature-inspired optimization technique that simulates the behavior of remoras, small fish that attach themselves to larger hosts (such as sharks) to navigate the ocean more efficiently. This implementation minimizes an objective function defined as the sum of squares of the input variables.
+
+### Objective Function
+
+The objective function for this example is defined as:
+
+\[
+f(X) = \sum_{i=1}^{\text{Dim}} X_i^2
+\]
+
+This function has its global minimum at \(X = [0, 0, \ldots, 0]\).
+
+### Algorithm Overview
+
+The **Remora Optimization (Remora Opt)** algorithm models remoras' behavior, which balance between following the best-known position in the search space and exploring new positions. The algorithm follows these main steps:
+
+1. **Initialization**: Remoras are randomly initialized within the bounds defined by `lb` (lower bound) and `ub` (upper bound).
+2. **Evaluation**: Each remora’s fitness is evaluated by calculating the objective function.
+3. **Best Position Tracking**: Track the best position (`Rbest`) and corresponding fitness value (`fitBest`) found by any remora.
+4. **Position Update**: Each remora’s position is updated based on its current position, previous position, and the best-known position.
+5. **Iteration**: Steps 2-4 are repeated for a defined number of iterations (`T`).
+
+### Code Structure
+
+#### `obj(X)` Function
+
+This function computes the objective function value for a given input vector `X`.
+
+##### Parameters:
+- `X`: A numpy array representing the input vector.
+
+##### Returns:
+- The sum of squares of the elements in `X`.
+
+#### `remore_opt()` Function
+
+This function implements the Remora Optimization algorithm.
+
+##### Parameters:
+- `N`: Number of remoras in the population (default is `50`).
+- `Dim`: Dimensionality of the search space (default is `2`).
+- `lb`: The lower bound of the search space (default is `-100`).
+- `ub`: The upper bound of the search space (default is `100`).
+- `C`: Attraction coefficient (default is `0.1`).
+- `T`: Maximum number of iterations (default is `200`).
+
+##### Process:
+1. **Initialization**: Randomly initialize the positions `R` of the remoras within the specified bounds.
+2. **Best Position Tracking**: Track the best position found by any remora (`Rbest`) and the corresponding objective function value (`fitBest`).
+3. **Position Update**:
+   - **Leader Remora**: For each leader remora, update position based on the best-known position, with a probabilistic approach that includes random coefficients for exploration.
+   - **Random Influence**: Some remoras adjust their position by referencing the best-known position (`Rbest`) and another randomly chosen remora.
+   - **Velocity Adjustment**: For remoras that do not meet the best fitness, update position using a velocity parameter `V` that decreases as the iterations progress, helping balance exploration and exploitation.
+4. **Boundary Enforcement**: Clip the positions to ensure they remain within bounds, then evaluate the objective function and update the best position if a new best is found.
+
+##### Output:
+- The function prints the best objective function value found (`fitBest`) at the end of the optimization.
+
+
+
