@@ -87,10 +87,10 @@ def grey_wolf(run = 30, N = 20, lb = -10, ub = 10, T = 100, D = 2):
                 if f[i] <= f_delta and f[i] > f_alpha and f[i] > f_beta:
                     X_delta = X[i].copy()
                     f_delta = f[i].copy()
-            print("X_alpha: ", X_alpha, "Best: ", obj(X_alpha))
-            run_best[run] = obj(X_alpha).copy()
-        print("Ortalama: ", np.mean(run_best))
-        print("Standart Sapma: ", np.std(run_best))  # standart sapma küçük yani güzel bir sonuç
+        print("X_alpha: ", X_alpha, "Best: ", obj(X_alpha))
+        run_best[run] = obj(X_alpha).copy()
+    print("Ortalama: ", np.mean(run_best))
+    print("Standart Sapma: ", np.std(run_best))  # standart sapma küçük yani güzel bir sonuç
 
 
 grey_wolf()
