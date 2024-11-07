@@ -268,3 +268,190 @@ This function implements the Whale Optimization Algorithm.
 ### Results
 
 The results of the optimization can be visualized through a plot of the fitness values over iterations, showing the convergence behavior of the algorithm.
+
+
+
+## 5. Mouse Swarm Optimization in Python
+
+This repository contains an implementation of the **Mouse Swarm Optimization (MSO)** algorithm in Python. MSO is a population-based optimization technique inspired by the social behavior of mice, aiming to find optimal solutions within a defined search space. This implementation minimizes an objective function, defined as the sum of squares of the input variables.
+
+### Objective Function
+
+The objective function for this example is defined as:
+
+\[
+f(X) = \sum_{i=1}^{D} X_i^2
+\]
+
+This function is a simple quadratic function, where the global minimum is located at \(X = [0, 0, \ldots, 0]\).
+
+### Algorithm Overview
+
+The **Mouse Swarm Optimization (MSO)** algorithm works by initializing a population of candidate solutions (mice) that move around in the search space. Each mouse updates its position based on its distance from the best-known position and a random adjustment factor. The algorithm follows these main steps:
+
+1. **Initialization**: Mice are randomly positioned within the bounds defined by `lb` (lower bound) and `ub` (upper bound).
+2. **Evaluation**: The objective function is evaluated for each mouse to determine its fitness.
+3. **Update Best Position**: Track the best position (`Pr`) found by any mouse and its corresponding fitness value (`fitbest`).
+4. **Position Update**: Each mouse’s position is adjusted based on a calculated random value `R` and an adjustment factor `A`, which decreases over time.
+5. **Iteration**: Steps 2-4 are repeated for a defined number of iterations (`T`).
+
+### Code Structure
+
+#### `obj(X)` Function
+
+This function computes the objective function value for a given input vector `X`.
+
+##### Parameters:
+- `X`: A numpy array representing the input vector.
+
+##### Returns:
+- The sum of squares of the elements in `X`.
+
+#### `mouse_swarm()` Function
+
+This function implements the Mouse Swarm Optimization algorithm.
+
+##### Parameters:
+- `N`: The number of mice in the swarm (default is `30`).
+- `T`: The maximum number of iterations (default is `100`).
+- `lb`: The lower bound of the search space for each dimension (default is `-5`).
+- `ub`: The upper bound of the search space for each dimension (default is `5`).
+- `D`: The dimensionality of the search space (default is `2`).
+
+##### Process:
+1. **Initialization**: Randomly initialize the positions `P` of the mice and evaluate their objective function values `fit`.
+2. **Best Position Update**: Track the best position found by any mouse (`Pr`) and its corresponding objective function value (`fitbest`).
+3. **Position Update**: For each iteration:
+   - Calculate the adjustment factor `A` and random component `R` for each mouse.
+   - Update each mouse’s position based on its current position, the best position, and the adjustment factor.
+   - Clip the positions to ensure they stay within the defined bounds.
+   - Evaluate the objective function for each mouse and update the best position if a new best is found.
+
+##### Output:
+- The function prints the best objective function value found (`fitbest`) and the corresponding position (`Pr`).
+
+
+## 6. Grey Wolf Optimization in Python
+
+This repository contains an implementation of the **Grey Wolf Optimization (GWO)** algorithm in Python. GWO is a nature-inspired optimization technique that simulates the social hierarchy and hunting behavior of grey wolves to find optimal solutions within a defined search space. This implementation minimizes an objective function.
+
+### Objective Function
+
+The objective function for this example is defined as:
+
+\[
+f(x) = (x[0] - 5)^2 + (x[1] - 2)^2
+\]
+
+This function has its global minimum located at \(x = [5, 2]\).
+
+### Algorithm Overview
+
+The **Grey Wolf Optimization (GWO)** algorithm mimics the hunting behavior of grey wolves, which organize themselves into social hierarchies. The algorithm uses a population of candidate solutions (wolves) and adjusts their positions according to the best-known solutions, following these main steps:
+
+1. **Initialization**: Wolves are randomly initialized within the bounds defined by `lb` (lower bound) and `ub` (upper bound).
+2. **Evaluation**: Each wolf’s fitness is evaluated by calculating the objective function.
+3. **Hierarchy Setup**: The top three wolves with the best fitness values are assigned roles as alpha, beta, and delta wolves, while the remaining wolves are considered omegas.
+4. **Position Update**: Wolves update their positions based on their distances from the alpha, beta, and delta wolves, incorporating random adjustments for exploration.
+5. **Iteration**: Steps 2-4 are repeated for a defined number of iterations (`T`).
+
+### Code Structure
+
+#### `obj(x)` Function
+
+This function computes the objective function value for a given input vector `x`.
+
+##### Parameters:
+- `x`: A numpy array representing the input vector.
+
+##### Returns:
+- The objective function value based on `x`.
+
+#### `grey_wolf()` Function
+
+This function implements the Grey Wolf Optimization algorithm.
+
+##### Parameters:
+- `run`: Number of independent runs (default is `30`).
+- `N`: Number of wolves in the population (default is `20`).
+- `lb`: The lower bound of the search space (default is `-10`).
+- `ub`: The upper bound of the search space (default is `10`).
+- `T`: Maximum number of iterations per run (default is `100`).
+- `D`: Dimensionality of the search space (default is `2`).
+
+##### Process:
+1. **Initialization**: Randomly initialize the positions `X` of the wolves within the specified bounds.
+2. **Fitness Evaluation and Sorting**: Calculate the objective function for each wolf and sort them to identify the alpha, beta, and delta wolves.
+3. **Position Update**: For each wolf, adjust its position based on its distance from the alpha, beta, and delta wolves using randomly generated coefficients `A` and `C`.
+   - Calculate distances to alpha, beta, and delta wolves.
+   - Adjust each dimension of the position based on the weighted average of these three distances.
+4. **Boundary Enforcement**: Clip each wolf’s position to ensure it remains within the bounds, then recalculate the objective function.
+5. **Hierarchy Update**: Update the positions of alpha, beta, and delta wolves based on the new best solutions found.
+6. **Run Statistics**: At the end of each run, print the best solution and objective function value for the alpha wolf.
+
+#### Output:
+- Prints the best objective function value found (`f_alpha`) and the corresponding position (`X_alpha`) at the end of each run.
+- Prints the average and standard deviation of the best solutions across all runs.
+
+
+
+## 7. Salp Swarm Optimization in Python
+
+This repository contains an implementation of the **Salp Swarm Optimization (SSO)** algorithm in Python. SSO is a nature-inspired optimization technique that simulates the movement and swarming behavior of salps to find optimal solutions within a search space. This implementation is designed to minimize an objective function defined as the sum of squares of the input variables.
+
+### Objective Function
+
+The objective function for this example is defined as:
+
+\[
+f(X) = \sum_{i=1}^{D} X_i^2
+\]
+
+This function has its global minimum at \(X = [0, 0, \ldots, 0]\).
+
+### Algorithm Overview
+
+The **Salp Swarm Optimization (SSO)** algorithm models the swarming behavior of salps, where each salp adjusts its position based on its relative location in the swarm and the best-known position in the search space. The algorithm follows these main steps:
+
+1. **Initialization**: Salps are randomly initialized within the bounds defined by `lb` (lower bound) and `ub` (upper bound).
+2. **Evaluation**: Each salp’s fitness is evaluated by calculating the objective function.
+3. **Best Position Tracking**: Track the best position (`F`) and corresponding fitness value (`fitBest`) found by any salp.
+4. **Position Update**: Each salp’s position is updated based on its distance from the best position, incorporating random coefficients for exploration.
+5. **Iteration**: Steps 2-4 are repeated for a defined number of iterations (`T`).
+
+### Code Structure
+
+#### `obj(X)` Function
+
+This function computes the objective function value for a given input vector `X`.
+
+##### Parameters:
+- `X`: A numpy array representing the input vector.
+
+##### Returns:
+- The sum of squares of the elements in `X`.
+
+#### `salp_optimization()` Function
+
+This function implements the Salp Swarm Optimization algorithm.
+
+##### Parameters:
+- `N`: Number of salps in the swarm (default is `20`).
+- `T`: Maximum number of iterations (default is `100`).
+- `lb`: The lower bound of the search space (default is `-5`).
+- `ub`: The upper bound of the search space (default is `5`).
+- `D`: Dimensionality of the search space (default is `2`).
+
+##### Process:
+1. **Initialization**: Randomly initialize the positions `X` of the salps within the specified bounds.
+2. **Best Position Tracking**: Track the best position found by any salp (`F`) and the corresponding objective function value (`fitBest`).
+3. **Position Update**:
+   - **Leader Salps**: For each leader salp (first half of the population), update positions based on the best-known position and random coefficients.
+   - **Follower Salps**: For each follower salp (second half of the population), update positions based on the position of the preceding salp.
+   - Update the exponential coefficient `c1` based on the current iteration to control the exploration-exploitation trade-off.
+4. **Boundary Enforcement**: Clip the positions to ensure they remain within bounds, then evaluate the objective function and update the best position if a new best is found.
+
+##### Output:
+- The function prints the best objective function value found (`fitBest`) and the corresponding position (`F`) at the end of the optimization.
+
+
