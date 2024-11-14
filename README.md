@@ -518,4 +518,65 @@ This function implements the Remora Optimization algorithm.
 - The function prints the best objective function value found (`fitBest`) at the end of the optimization.
 
 
+## 9. Honey Badger Optimization in Python
+
+This repository contains an implementation of the **Honey Badger Optimization (HBO)** algorithm in Python. HBO is a bio-inspired optimization algorithm that simulates the foraging behavior of honey badgers, which employ tactics of digging and targeting prey to efficiently search for food. This implementation minimizes an objective function defined as the sum of squares of the input variables.
+
+### Objective Function
+
+The objective function for this example is defined as:
+
+\[
+f(X) = \sum_{i=1}^{\text{Dim}} X_i^2
+\]
+
+This function has its global minimum at \(X = [0, 0, \ldots, 0]\).
+
+### Algorithm Overview
+
+The **Honey Badger Optimization (HBO)** algorithm mimics honey badgers’ foraging strategy, alternating between digging for prey and consuming honey. It proceeds through the following steps:
+
+1. **Initialization**: The honey badgers are initialized randomly within the bounds defined by `lb` (lower bound) and `ub` (upper bound).
+2. **Prey Identification**: The position of the prey (`X_prey`) is identified as the honey badger with the lowest objective function value.
+3. **Position Update**: Each honey badger updates its position using either a **digging** phase or a **honey consumption** phase, determined by a random probability.
+4. **Iteration**: Steps 2-3 are repeated for a defined number of iterations (`T`).
+
+### Code Structure
+
+#### `obj(X)` Function
+
+This function computes the objective function value for a given input vector `X`.
+
+##### Parameters:
+- `X`: A numpy array representing the input vector.
+
+##### Returns:
+- The sum of squares of the elements in `X`.
+
+#### `honey_badger_optimization()` Function
+
+This function implements the Honey Badger Optimization algorithm.
+
+##### Parameters:
+- `N`: Number of honey badgers in the population (default is `20`).
+- `beta`: Amplification factor in the digging phase (default is `6`).
+- `C`: Attraction coefficient (default is `2`).
+- `T`: Maximum number of iterations (default is `500`).
+- `Dim`: Dimensionality of the search space (default is `2`).
+- `ub`: Upper bound of the search space (default is `10`).
+- `lb`: Lower bound of the search space (default is `-10`).
+
+##### Process:
+1. **Initialization**: Randomly initialize the positions `X` of the honey badgers within the specified bounds.
+2. **Prey Identification**: Identify the prey (`X_prey`) as the honey badger with the best fitness (smallest objective function value).
+3. **Position Update**:
+   - **Digging Phase**: Each honey badger updates its position based on a set of random parameters and the prey's position to simulate the digging behavior.
+   - **Honey Consumption Phase**: Each honey badger adjusts its position toward the prey in smaller increments to simulate energy conservation while consuming honey.
+4. **Boundary Enforcement**: Clip the positions to ensure they remain within bounds, then evaluate the objective function and update the best position if a new best is found.
+
+##### Output:
+- The function prints the best objective function value found (`F_prey`) and the corresponding position (`X_prey`) at the end of the optimization.
+
+
+
 
