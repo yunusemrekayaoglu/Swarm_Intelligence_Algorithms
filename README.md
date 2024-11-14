@@ -578,5 +578,62 @@ This function implements the Honey Badger Optimization algorithm.
 - The function prints the best objective function value found (`F_prey`) and the corresponding position (`X_prey`) at the end of the optimization.
 
 
+## 10. Kingfisher Optimization in Python
+
+This repository contains an implementation of the **Kingfisher Optimization (KO)** algorithm in Python. KO is a metaheuristic optimization algorithm inspired by the foraging and survival strategies of kingfishers. This algorithm leverages unique strategies to locate the global optimum of a given objective function, specifically minimizing the sum of squared inputs.
+
+### Objective Function
+
+The objective function for this example is defined as:
+
+\[
+f(X) = \sum_{i=1}^{\text{Dim}} X_i^2
+\]
+
+This function has its global minimum at \(X = [0, 0, \ldots, 0]\).
+
+### Algorithm Overview
+
+The **Kingfisher Optimization (KO)** algorithm is inspired by the hunting behavior of kingfishers and has two primary phases: exploration and exploitation. These phases are represented by movement strategies to optimize the solution over a set number of iterations.
+
+1. **Initialization**: A population of kingfishers is randomly initialized within specified bounds (`lb` and `ub`).
+2. **Exploration and Exploitation**: For each iteration, kingfishers update their positions based on their neighbors and the best known position in the population.
+3. **Behavioral Adjustment**: Each kingfisher adjusts its movement strategies based on different factors, simulating the hunting efficiency of the kingfisher.
+4. **Iteration**: Steps 2-3 are repeated for a specified number of iterations (`Tmax`).
+
+### Code Structure
+
+#### `obj(X)` Function
+
+This function calculates the objective function value for a given input vector `X`.
+
+##### Parameters:
+- `X`: A numpy array representing the input vector.
+
+##### Returns:
+- The sum of squares of the elements in `X`.
+
+#### `kingfisher_optimization()` Function
+
+This function implements the Kingfisher Optimization algorithm.
+
+##### Parameters:
+- `N`: Number of kingfishers in the population (default is `20`).
+- `Tmax`: Maximum number of iterations (default is `500`).
+- `Dim`: Dimensionality of the search space (default is `2`).
+- `ub`: Upper bound of the search space (default is `10`).
+- `lb`: Lower bound of the search space (default is `-10`).
+- `BF`: A parameter that controls the exploration behavior (default is `8`).
+
+##### Process:
+1. **Initialization**: Randomly initialize the positions `X` of the kingfishers within the defined bounds.
+2. **Exploration and Exploitation**: Each kingfisher updates its position by either simulating pursuit behavior or a random attraction towards other kingfishers.
+   - **Pursuit Movement**: Kingfishers adjust positions based on a "pursuit" of the best-found solution and other individuals.
+   - **Random Movement**: Kingfishers move based on random interactions with neighbors, exploring the search space.
+3. **Boundary Enforcement**: Clip the positions to remain within the bounds, evaluate the objective function, and update the best solution if a new best is found.
+
+##### Output:
+- The function prints the best objective function value found (`fbest`) and the corresponding position (`Xbest`) at the end of the optimization.
+
 
 

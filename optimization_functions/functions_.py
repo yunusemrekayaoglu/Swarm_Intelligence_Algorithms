@@ -32,6 +32,7 @@ def obj_3(X):
     ub = 100
     Fmin --> 0
     """
+
     return sum((X + 0.5) ** 2)
 
 def obj_4(X):
@@ -43,6 +44,7 @@ def obj_4(X):
     D = len(X)
     sum_part = sum([(i + 1) * X[i] ** 4 for i in range(D)])
     random_part = np.random.random()
+
     return sum_part + random_part
 
 def obj_5(X):
@@ -52,6 +54,7 @@ def obj_5(X):
     ub = 500
     Fmin --> -418.9839 * D
     """
+
     return sum(-X * np.sin(np.sqrt(np.abs(X))))
 
 def obj_6(X):
@@ -61,6 +64,7 @@ def obj_6(X):
     ub = 5.12
     Fmin --> 0
     """
+
     return sum(X ** 2 - 10 * np.cos(2 * np.pi * X) + 10)
 
 def obj_7(X):
@@ -73,6 +77,7 @@ def obj_7(X):
     D = len(X)
     term1 = -20 * np.exp(-0.2 * np.sqrt(np.mean(X ** 2)))
     term2 = -np.exp(np.mean(np.cos(2 * np.pi * X)))
+
     return term1 + term2 + 20 + np.e
 
 def obj_8(X):
@@ -84,6 +89,7 @@ def obj_8(X):
     """
     X1 = X[0]
     X2 = X[1]
+
     return 4 * X1 ** 2 - 2.1 * X1 ** 4 + (1 / 3) * X1 ** 6 + X1 * X2
 
 def obj_9(X):
@@ -97,6 +103,7 @@ def obj_9(X):
     X2 = X[1]
     term1 = ( X2 - ( 5.1 / ( 4 * np.pi ** 2)) * X1 ** 2 + (5 / np.pi) * X1 - 6) ** 2
     term2 = 10 * (1 - 1 / (8 * np.pi)) * np.cos(X1)
+
     return term1 + term2 + 10
 
 def obj_10(X):
